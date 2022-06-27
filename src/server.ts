@@ -30,7 +30,7 @@ import { error } from 'console';
 
   /**************************************************************************** */
 
-  app.get ("/filteredimage/", (req, res) => {
+  app.get ("/filteredimage/", async (req, res) => {
     const {image_url} = req.query;
 
     if ( !image_url ) {
@@ -43,7 +43,7 @@ import { error } from 'console';
           if (err) {
             return res.status(400).send({message: err})
           } else {
-            deleteLocalFiles(filteredPath)
+            deleteLocalFiles([filteredPath])
           }
         });
       })
@@ -51,7 +51,6 @@ import { error } from 'console';
         return res.status(422).send({ message: error });
       });
         
-
     // return res.status(200)
     //             .send(`Thank You, ${image_url}`);
     
