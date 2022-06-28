@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 import { error } from 'console';
@@ -30,8 +30,8 @@ import { error } from 'console';
 
   /**************************************************************************** */
 
-  app.get ("/filteredimage/", async (req, res) => {
-    const {image_url} = req.query;
+  app.get ("/filteredimage/", async (req: Request, res: Response) => {
+    const {image_url}: {image_url:string} = req.query;
 
     if ( !image_url ) {
       return res.status(400).send(`Image URL is required`);
